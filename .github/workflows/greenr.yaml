@@ -32,7 +32,8 @@ jobs:
           git config --global user.email "bot@productivr.com"
           git add important-program.txt fake-metrics.log
           git commit -m "feat: boosted Greenr productivity with Bullocks AI-driven synergy [$(date)]" || echo "No changes to commit"
-          git push
+          git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/Sun-Wukhan/Greenr.git
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
