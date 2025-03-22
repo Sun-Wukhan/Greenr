@@ -25,6 +25,34 @@ jobs:
           echo "🧪 Test coverage: $((RANDOM % 6 + 94)).$((RANDOM % 9))%" >> fake-metrics.log
           echo "🚀 Developer Velocity Index: $((RANDOM % 20 + 80))" >> fake-metrics.log
           echo "🔥 Synergy Quotient: $(shuf -i 42-69 -n 1)" >> fake-metrics.log
+      
+      - name: Install Matplotlib
+        run: pip install matplotlib
+
+      - name: Generate Fake Productivity Chart
+        run: |
+          python3 - <<'EOF'
+          import matplotlib.pyplot as plt
+          import random
+          import datetime
+          import matplotlib.dates as mdates
+
+          # Generate fake hourly productivity data for the last 24 hours
+          times = [datetime.datetime.now() - datetime.timedelta(hours=i) for i in reversed(range(24))]
+          productivity = [random.uniform(60, 100) for _ in range(24)]
+
+          plt.figure(figsize=(10, 5))
+          plt.plot(times, productivity, marker='o', linestyle='-', color='blue')
+          plt.title("Fake Productivity Chart")
+          plt.xlabel("Time")
+          plt.ylabel("Productivity Score")
+          plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
+          plt.gcf().autofmt_xdate()
+          plt.grid(True)
+          plt.tight_layout()
+          plt.savefig("productivity-chart.png")
+          EOF
+  
 
       - name: Commit and push changes
         run: |
