@@ -52,13 +52,13 @@ jobs:
           plt.tight_layout()
           plt.savefig("productivity-chart.png")
           EOF
-  
+
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "Greenr Bot"
-          git config --global user.email "bot@greenr.com"
-          git add important-program.txt fake-metrics.log
+          git config --global user.name "Sun-Wukhan"
+          git config --global user.email "60425043+Sun-Wukhan@users.noreply.github.com"
+          git add important-program.txt fake-metrics.log productivity-chart.png
           git commit -m "feat: boosted Greenr productivity with Bullocks AI-driven synergy [$(date)]" || echo "No changes to commit"
           git push "https://${GH_TOKEN}@github.com/Sun-Wukhan/Greenr.git" HEAD:main
         env:
