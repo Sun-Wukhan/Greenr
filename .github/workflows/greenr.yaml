@@ -1,4 +1,4 @@
-name: Productivr - Fake Productivity Commits
+name: Greenr - Productivity Commits
 
 on:
   schedule:
@@ -28,12 +28,11 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "Productivr Bot"
-          git config --global user.email "bot@productivr.com"
+          git config --global user.name "Greenr Bot"
+          git config --global user.email "bot@greenr.com"
           git add important-program.txt fake-metrics.log
           git commit -m "feat: boosted Greenr productivity with Bullocks AI-driven synergy [$(date)]" || echo "No changes to commit"
-          git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/Sun-Wukhan/Greenr.git
-          git push origin HEAD:main
+          git push "https://${GH_TOKEN}@github.com/Sun-Wukhan/Greenr.git" HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
