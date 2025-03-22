@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: productivr
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: productivr
+              image: productivr:latest
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: GITHUB_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: github-secret
+                      key: token
+                - name: GITHUB_REPO
+                  value: "Sun-Wukhan/Greenr"
+          restartPolicy: OnFailure
