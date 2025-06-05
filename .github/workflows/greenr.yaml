@@ -58,7 +58,9 @@ jobs:
         run: |
           git config --global user.name "Sun-Wukhan"
           git config --global user.email "${{ secrets.GH_EMAIL }}"
+          git stash --include-untracked
           git pull --rebase origin main
+          git stash pop || echo "No stash to pop"
           git add important-program.txt fake-metrics.log productivity-chart.png
           git commit -m "feat: boosted Greenr productivity with Bullocks AI-driven synergy [$(date)]" || echo "No changes to commit"
           git push "https://${GH_TOKEN}@github.com/Sun-Wukhan/Greenr.git" HEAD:main
